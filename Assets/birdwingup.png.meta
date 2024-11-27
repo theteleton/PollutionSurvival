@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      birdwingup_0: -136834512636766482
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
