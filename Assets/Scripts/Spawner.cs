@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
 public class Spawner : MonoBehaviour
 {
     public Pipes prefab;
@@ -24,10 +25,13 @@ public class Spawner : MonoBehaviour
 		int randomValue = GetRandomValue(APIFetcher.Instance.values);
 		GameManager.Instance.allSpawns.Add(APIFetcher.Instance.positions[randomValue]); 
 		GameManager.Instance.allValues.Add(APIFetcher.Instance.values[randomValue]);
-		Debug.Log("Values: " + string.Join(", ", GameManager.Instance.allSpawns));	
+		
+        float randomValue2 =  (float)APIFetcher.Instance.values[randomValue] / 300f;
+        Debug.Log(randomValue2);
         Pipes pipes = Instantiate(prefab, transform.position, Quaternion.identity);
         pipes.transform.position += Vector3.up * Random.Range(minHeight, maxHeight);
-        pipes.gap = verticalGap;
+        pipes.gap = (float)(randomValue2 * verticalGap) + 1f;
+        Debug.Log("Values: " + pipes.gap + " " + ((float)(randomValue2 * verticalGap) + 1f));
     }
 
 	int GetRandomValue(List<int> list)
