@@ -3,9 +3,9 @@
 public class Player : MonoBehaviour
 {
     public Sprite[] sprites;
-    public float strength = 1f;
+    public float strength = 2f;
     public float gravity = -9.81f;
-    public float tilt = 3f;
+    public float tilt = 5f;
 
     private SpriteRenderer spriteRenderer;
     private Vector3 direction;

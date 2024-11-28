@@ -26,11 +26,11 @@ public class Spawner : MonoBehaviour
 		GameManager.Instance.allSpawns.Add(APIFetcher.Instance.positions[randomValue]); 
 		GameManager.Instance.allValues.Add(APIFetcher.Instance.values[randomValue]);
 		
-        float randomValue2 =  (float)APIFetcher.Instance.values[randomValue] / 250f;
+        float randomValue2 =  (float)APIFetcher.Instance.values[randomValue] / 300f;
         Debug.Log(randomValue2);
         Pipes pipes = Instantiate(prefab, transform.position, Quaternion.identity);
         pipes.transform.position += Vector3.up * Random.Range(minHeight, maxHeight);
-        pipes.gap = (float)((1f - randomValue2) * verticalGap) + 1f;
+        pipes.gap = (float)(randomValue2 * verticalGap) + 1f;
         Debug.Log("Values: " + pipes.gap + " " + ((float)(randomValue2 * verticalGap) + 1f));
     }
 
