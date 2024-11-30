@@ -18,6 +18,7 @@ public class APIFetcher : MonoBehaviour
         // Singleton pattern setup
         if (Instance == null)
         {
+            Debug.Log("Instance found!");
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -53,6 +54,10 @@ public class APIFetcher : MonoBehaviour
             yield return new WaitForSeconds(1100f);
         }
     }
+    public List<int> GetValues()
+    {
+        return values;
+    }
 
     private void ProcessAPIResponse(string jsonResponse)
     {
@@ -79,12 +84,14 @@ public class APIFetcher : MonoBehaviour
 				}
             }
 
-            //Debug.Log("Values: " + string.Join(", ", values));
-            //Debug.Log("Positions: " + string.Join(", ", positions));
+            Debug.Log("Values: " + string.Join(", ", values));
+            Debug.Log("Positions: " + string.Join(", ", positions));
         }
         catch (System.Exception e)
         {
             Debug.LogError("Error processing API response: " + e.Message);
         }
+
+        
     }
 }

@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public float strength = 2f;
     public float gravity = -9.81f;
     public float tilt = 5f;
+    private static int collisionCounter = 0;
 
     private SpriteRenderer spriteRenderer;
     private Vector3 direction;
@@ -15,7 +16,26 @@ public class Player : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+    public AudioSource src;
+    public AudioClip flap, death, pass;
 
+    public void PlayFlap()
+    {
+        src.clip = flap;
+        src.Play();
+    }
+
+    public void PlayDeath()
+    {
+        src.clip = death;
+        src.Play();
+    }
+
+    public void PlayPass()
+    {
+        src.clip = pass;
+        src.Play();
+    }
     private void Start()
     {
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
@@ -33,6 +53,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0)) {
             direction = Vector3.up * strength;
+            PlayFlap();
         }
 
         // Apply gravity and update the position
@@ -60,11 +81,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Obstacle")) {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
             GameManager.Instance.GameOver();
-        } else if (other.gameObject.CompareTag("Scoring")) {
-            GameManager.Instance.IncreaseScore();
+            PlayDeath();
+            
         }
+        else if (other.gameObject.CompareTag("Scoring")) {
+            GameManager.Instance.IncreaseScore();
+            PlayPass();
+        } 
+      
+        
     }
 
 }
