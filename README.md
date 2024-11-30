@@ -20,6 +20,4 @@
 
 ---
 
-## Installation and Setup
-1. Clone the repository:
    
